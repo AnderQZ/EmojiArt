@@ -11,16 +11,60 @@ class EmojiArtDocument: ObservableObject
 {
     @Published private(set) var emojiArt: EmojiArtModel {
         didSet {
+            scheduleAutosave()
             if emojiArt.background != oldValue.background {
                 fetchBackgroundImageDataIfNecessary()
             }
         }
     }
     
+    private var autosaveTimer: Timer?
+    
+    private func scheduleAutosave() {
+        autosaveTimer?.invalidate()
+        autosaveTimer = Timer.scheduledTimer(withTimeInterval: Autosave.coalescingInterval, repeats: false, block: { _ in
+            self.autosave()
+        })
+    }
+    
+    private struct Autosave {
+        static let filename = "Autosaved.emjiart"
+        static var url: URL? {
+            let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+            return documentDirectory?.appendingPathComponent(filename)
+        }
+        static let coalescingInterval = 5.0
+    }
+    
+    private func autosave() {
+        if let url = Autosave.url {
+            save(to: url)
+        }
+    }
+    
+    private func save(to url: URL) {
+        let thisfunction = "\(String(describing: self)).\(#function)"
+        do {
+            let data: Data = try emojiArt.json()
+            print("\(thisfunction) json = \(String(data: data, encoding: .utf8) ?? "nil")")
+            try data.write(to: url)
+            print("\(thisfunction) success")
+        } catch let encodingError where encodingError is EncodingError {
+            print("\(thisfunction) couldn't encode EmojiArt as JSON because \(encodingError.localizedDescription)")
+        } catch {
+            print("\(thisfunction) error = \(error)")
+        }
+    }
+    
     init() {
-        emojiArt = EmojiArtModel()
-        emojiArt.addEmoji("🦁", at: (-200, -100), size: 90)
-        emojiArt.addEmoji("🦄", at: (80, 100), size: 70)
+        if let url = Autosave.url, let autosaveEmojiArt = try? EmojiArtModel(url: url) {
+            emojiArt = autosaveEmojiArt
+            fetchBackgroundImageDataIfNecessary()
+        } else {
+            emojiArt = EmojiArtModel()
+            //        emojiArt.addEmoji("🦁", at: (-200, -100), size: 90)
+            //        emojiArt.addEmoji("🦄", at: (80, 100), size: 70)
+        }
     }
     
     var emojis: [EmojiArtModel.Emoji] { emojiArt.emojis }
