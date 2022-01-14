@@ -70,7 +70,7 @@ class PaletteStore: ObservableObject {
     }
     
     // MARK: - Intent
-    func palatte(at index: Int) -> Palette {
+    func palette(at index: Int) -> Palette {
         let safeIndex = min(max(index, 0), palettes.count - 1)
         return palettes[safeIndex]
     }

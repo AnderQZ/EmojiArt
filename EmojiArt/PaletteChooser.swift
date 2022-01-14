@@ -13,12 +13,12 @@ struct PaletteChooser: View {
     
     @EnvironmentObject var store: PaletteStore
     
-    @State private var chosePaletteIndex = 0
+    @State private var chosenPaletteIndex = 0
     
     var body: some View {
         HStack {
             paletteControlButton
-            body(for: store.palatte(at: chosePaletteIndex))
+            body(for: store.palette(at: chosenPaletteIndex))
         }
         .clipped()
     }
@@ -26,7 +26,7 @@ struct PaletteChooser: View {
     var paletteControlButton: some View {
         Button {
             withAnimation {
-                chosePaletteIndex = (chosePaletteIndex + 1) % store.palettes.count
+                chosenPaletteIndex = (chosenPaletteIndex + 1) % store.palettes.count
             }
         } label: {
             Image(systemName: "paintpalette")
@@ -37,11 +37,15 @@ struct PaletteChooser: View {
     
     @ViewBuilder
     var contextMenu: some View {
+        AnimationActionButton(title: "Edit", systemImage: "pencil") {
+            editing = true
+        }
         AnimationActionButton(title: "New", systemImage: "plus") {
-            store.insertPalette(named: "New", emojis: "", at: chosePaletteIndex)
+            store.insertPalette(named: "New", emojis: "", at: chosenPaletteIndex)
+            editing = true
         }
         AnimationActionButton(title: "Delete", systemImage: "minus.circle") {
-            chosePaletteIndex = store.removePalette(at: chosePaletteIndex)
+            chosenPaletteIndex = store.removePalette(at: chosenPaletteIndex)
         }
         gotoMenu
     }
@@ -51,7 +55,7 @@ struct PaletteChooser: View {
             ForEach (store.palettes) { palette in
                 AnimationActionButton(title: palette.name) {
                     if let index = store.palettes.index(matching: palette) {
-                        chosePaletteIndex = index
+                        chosenPaletteIndex = index
                     }
                 }
                 
@@ -69,7 +73,12 @@ struct PaletteChooser: View {
         }
         .id(palette.id)
         .transition(rollTransition)
+        .popover(isPresented: $editing) {
+            PaletteEditor(palette: $store.palettes[chosenPaletteIndex])
+        }
     }
+    
+    @State private var editing = false
     
     var rollTransition: AnyTransition {
         AnyTransition.asymmetric(
