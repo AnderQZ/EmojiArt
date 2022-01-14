@@ -15,7 +15,7 @@ struct EmojiArtDocumentView: View {
     var body: some View {
         VStack {
             documentBody
-            palette
+            PaletteChooser(emojiFontSize: defaultEmojiFontSize)
         }
     }
     
@@ -149,34 +149,6 @@ struct EmojiArtDocumentView: View {
             steadyStateZoomScale = min(hZoom, vZoom)
         }
     }
-    
-    
-    
-    var palette: some View {
-        ScrollingEmojiView(emojis: testEmojis)
-            .font(.system(size: defaultEmojiFontSize))
-    }
-    
-    let testEmojis = "🤖💩🙄😪😺👽💋🦷👁🧕🦸‍♂️👠💍👑🧤🐶🐯🐧🐥🦄🐝🐛🦋🐌🐢"
-}
-
-
-struct ScrollingEmojiView: View {
-    let emojis: String
-    
-    var body: some View {
-        ScrollView(.horizontal) {
-            HStack {
-                ForEach(emojis.map { String($0)}, id:\.self) { emoji in
-                    Text(emoji)
-                        .onDrag { NSItemProvider(object: emoji as NSString) }
-                }
-            }
-        }
-    }
-    
-    
-    
 }
 
 
