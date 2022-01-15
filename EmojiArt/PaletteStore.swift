@@ -64,6 +64,8 @@ class PaletteStore: ObservableObject {
             insertPalette(named: "Animals", emojis: "🐶🐱🐭🐹🐰🦊🐻🐼🐻‍❄️🐨🐯🦁🐮🐷🐸🐵🐔🐧🦆🦉🐗🦄🐝🐛🦋🐌🐞🐜🪰🪲🪳🐢🐍🦎🦖🦕🐙🦑🦐🦞🐠🦈🦍🐘🐄🐎🐑🐇🐉")
             insertPalette(named: "Faces", emojis: "😀😅😂🤣🥲☺️😊😇🙂🙃😉😌😍🥰😘😗😋🤨🤩🥸😎🥵")
             insertPalette(named: "Weathers", emojis: "☀️🌤⛈🌩🌨❄️🌪☔️")
+            insertPalette(named: "Flags", emojis: "🏳️‍🌈🇦🇫🇦🇿🇦🇩🇦🇽🇦🇺🇦🇴🇪🇬🇦🇷🏳️‍⚧️🇺🇳🇦🇪🇦🇮🇲🇴🇵🇾🇵🇸🇧🇧🇦🇬🇮🇪🇦🇼🇦🇱🇩🇿🇴🇲🇪🇪🇦🇹🇵🇬🇧🇭🇧🇬🇵🇪🇧🇴🇧🇮🇩🇪🇩🇰🇬🇶🇰🇵🇮🇴🇧🇿🇧🇼🇧🇹🇧🇫🇧🇦🇵🇱🇵🇷🇮🇸🇪🇨🇪🇷🇬🇫🇹🇫🇻🇦🇵🇭🇫🇯🇨🇬🇬🇲🇫🇰🇨🇻🇫🇮🇨🇩🇨🇴🇨🇷🇬🇩🇬🇱🇬🇺🇬🇵🇨🇺🇬🇬🇬🇪🇬🇾🇰🇿🇭🇹🇰🇷🇳🇱🇧🇶🇸🇽🇲🇪🇭🇳🇰🇮🇨🇦🇬🇼🇬🇳🇰🇬🇩🇯🇰🇾🇶🇦🇨🇲🇱🇧🇱🇹🇱🇷🇱🇾🇷🇴🇷🇼🇷🇪🇲🇱🇾🇹🇲🇾")
+            insertPalette(named: "Magic", emojis: "💟☮️✝️☪️🕉☯️🕎🔯✡️☸️☦️🛐⛎♈️♉️♎️♍️♌️♋️♊️♏️♐️♑️♒️♓️🆔⚛️🉑☢️☣️🈸🈚️🈶📳📴🈺🈷️✴️🆚🉐㊙️㊗️🈴🅱️🅰️🈲🆘📛♨️💢🛑💯")
         } else {
             print("successfully loaded palettes from UserDefaults:\(palettes)")
         }
