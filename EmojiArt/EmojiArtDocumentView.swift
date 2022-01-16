@@ -55,6 +55,9 @@ struct EmojiArtDocumentView: View {
                     break
                 }
             }
+            .onReceive(document.$backgroundImage) { image in
+                zoomToFit(image, in: geometry.size)
+            }
         }
     }
     
@@ -161,12 +164,12 @@ struct EmojiArtDocumentView: View {
         TapGesture(count: 2)
             .onEnded {
                 withAnimation {
-                    sizeToFit(document.backgroundImage, in: size)
+                    zoomToFit(document.backgroundImage, in: size)
                 }
             }
     }
     
-    private func sizeToFit(_ image:UIImage?, in size: CGSize) {
+    private func zoomToFit(_ image:UIImage?, in size: CGSize) {
         if let image = image, image.size.width > 0, image.size.height > 0, size.width > 0, size.height > 0 {
             let hZoom = size.width / image.size.width
             let vZoom = size.height / image.size.height
