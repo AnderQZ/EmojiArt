@@ -38,19 +38,19 @@ struct PaletteChooser: View {
     
     @ViewBuilder
     var contextMenu: some View {
-        AnimationActionButton(title: "Edit", systemImage: "pencil") {
+        AnimatedActionButton(title: "Edit", systemImage: "pencil") {
 //            editing = true
             paletteToEdit = store.palette(at: chosenPaletteIndex)
         }
-        AnimationActionButton(title: "New", systemImage: "plus") {
+        AnimatedActionButton(title: "New", systemImage: "plus") {
             store.insertPalette(named: "New", emojis: "", at: chosenPaletteIndex)
 //            editing = true
             paletteToEdit = store.palette(at: chosenPaletteIndex)
         }
-        AnimationActionButton(title: "Delete", systemImage: "minus.circle") {
+        AnimatedActionButton(title: "Delete", systemImage: "minus.circle") {
             chosenPaletteIndex = store.removePalette(at: chosenPaletteIndex)
         }
-        AnimationActionButton(title: "Manager", systemImage: "slider.vertical.3") {
+        AnimatedActionButton(title: "Manager", systemImage: "slider.vertical.3") {
             managing = true
         }
         gotoMenu
@@ -59,7 +59,7 @@ struct PaletteChooser: View {
     var gotoMenu: some View {
         Menu {
             ForEach (store.palettes) { palette in
-                AnimationActionButton(title: palette.name) {
+                AnimatedActionButton(title: palette.name) {
                     if let index = store.palettes.index(matching: palette) {
                         chosenPaletteIndex = index
                     }

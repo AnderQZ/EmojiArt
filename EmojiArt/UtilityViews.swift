@@ -17,10 +17,18 @@ struct OptionalImage: View {
     }
 }
 
-struct AnimationActionButton: View {
+// syntactic sugar
+// lots of times we want a simple button
+// with just text or a label or a systemImage
+// but we want the action it performs to be animated
+// (i.e. withAnimation)
+// this just makes it easy to create such a button
+// and thus cleans up our code
+
+struct AnimatedActionButton: View {
     var title: String? = nil
     var systemImage: String? = nil
-    let action:() -> Void
+    let action: () -> Void
     
     var body: some View {
         Button {
@@ -50,6 +58,23 @@ struct AnimationActionButton: View {
 struct IdentifiableAlert: Identifiable {
     var id: String
     var alert: () -> Alert
+    
+    init(id: String, alert: @escaping () -> Alert) {
+        self.id = id
+        self.alert = alert
+    }
+    
+    // L15 convenience init added between L14 and L15
+    init(id: String, title: String, message: String) {
+        self.id = id
+        alert = { Alert(title: Text(title), message: Text(message), dismissButton: .default(Text("OK"))) }
+    }
+    
+    // L15 convenience init added between L14 and L15
+    init(title: String, message: String) {
+        self.id = title + message
+        alert = { Alert(title: Text(title), message: Text(message), dismissButton: .default(Text("OK"))) }
+    }
 }
 
 // a button that does undo (preferred) or redo
@@ -133,6 +158,34 @@ extension View {
             }
         } else {
             self
+        }
+    }
+}
+
+extension View {
+    func compactableToolbar<Content>(@ViewBuilder content: () -> Content) -> some View where Content: View {
+        self.toolbar {
+            content().modifier(CompactableIntoContextMenu())
+        }
+    }
+}
+
+struct CompactableIntoContextMenu: ViewModifier {
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    var compact: Bool { horizontalSizeClass == .compact }
+    
+    func body(content: Content) -> some View {
+        if compact {
+            Button {
+                
+            } label: {
+                Image(systemName: "ellipsis.circle")
+            }
+            .contextMenu {
+                content
+            }
+        } else {
+            content
         }
     }
 }
