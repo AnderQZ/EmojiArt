@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE57F5A3279BA5F200F97BFF /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE57F5A2279BA5F200F97BFF /* Camera.swift */; };
 		BE6F9FC2278FCEB100418B73 /* PaletteChooser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6F9FC1278FCEB100418B73 /* PaletteChooser.swift */; };
 		BE6F9FC427912A6200418B73 /* PaletteEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6F9FC327912A6200418B73 /* PaletteEditor.swift */; };
 		BE6F9FC62791682F00418B73 /* PaletteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6F9FC52791682F00418B73 /* PaletteManager.swift */; };
@@ -24,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		BE25246B27984B9E00FDF90C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		BE57F5A2279BA5F200F97BFF /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		BE6F9FC1278FCEB100418B73 /* PaletteChooser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteChooser.swift; sourceTree = "<group>"; };
 		BE6F9FC327912A6200418B73 /* PaletteEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteEditor.swift; sourceTree = "<group>"; };
 		BE6F9FC52791682F00418B73 /* PaletteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteManager.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 				BE25246B27984B9E00FDF90C /* Info.plist */,
 				BEA949B6278AECC500A38416 /* EmojiArtApp.swift */,
 				BEA949B8278AECC500A38416 /* EmojiArtDocumentView.swift */,
+				BE57F5A2279BA5F200F97BFF /* Camera.swift */,
 				BE6F9FC1278FCEB100418B73 /* PaletteChooser.swift */,
 				BE6F9FC327912A6200418B73 /* PaletteEditor.swift */,
 				BE6F9FC52791682F00418B73 /* PaletteManager.swift */,
@@ -174,6 +177,7 @@
 				BEA949B7278AECC500A38416 /* EmojiArtApp.swift in Sources */,
 				BEA949CB278AFCED00A38416 /* UtilityExtensions.swift in Sources */,
 				BEA949C9278AF73300A38416 /* EmojiArtDocument.swift in Sources */,
+				BE57F5A3279BA5F200F97BFF /* Camera.swift in Sources */,
 				BEA949C5278AEE5400A38416 /* EmojiArtModel.swift in Sources */,
 				BEA949C7278AF47500A38416 /* EmojiArtModel.Background.swift in Sources */,
 				BE6F9FC2278FCEB100418B73 /* PaletteChooser.swift in Sources */,

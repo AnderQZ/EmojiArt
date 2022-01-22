@@ -40,6 +40,8 @@
 	</array>
 	<key>UISupportsDocumentBrowser</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>使用相机拍摄背景图片</string>
 	<key>UTImportedTypeDeclarations</key>
 	<array>
 		<dict>
